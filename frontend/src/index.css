@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Semantic theme layer.
+  Components should reach for these CSS variables (via the Tailwind
+  utilities below, or var(--...) directly) instead of hard-coded hexes,
+  so a single class toggle on <html> repaints the whole app.
+*/
+:root {
+  --color-bg: #EEEBDD;
+  --color-bg-elevated: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-strong: #1B1717;
+  --color-text: #1B1717;
+  --color-text-muted: #1B1717B3; /* ~70% */
+  --color-accent: #810000;
+  --color-accent-strong: #630000;
+  --color-border: #1B171722; /* hairline */
+}
+
+html.dark {
+  --color-bg: #1B1717;
+  --color-bg-elevated: #221D1D;
+  --color-surface: #2A2222;
+  --color-surface-strong: #EEEBDD;
+  --color-text: #EEEBDD;
+  --color-text-muted: #EEEBDDB3;
+  --color-accent: #C23B3B; /* lifted crimson for AA contrast on dark */
+  --color-accent-strong: #810000;
+  --color-border: #EEEBDD22;
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Visible keyboard focus ring across the app */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.film-grain {
+  position: relative;
+}
+.film-grain::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
