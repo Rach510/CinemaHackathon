@@ -16,7 +16,7 @@
   --color-text: #1B1717;
   --color-text-muted: #1B1717B3; /* ~70% */
   --color-accent: #810000;
-  --color-accent-strong: #630000;
+  --color-accent-strong: #d8c00a;
   --color-border: #1B171722; /* hairline */
 }
 
@@ -27,8 +27,8 @@ html.dark {
   --color-surface-strong: #EEEBDD;
   --color-text: #EEEBDD;
   --color-text-muted: #EEEBDDB3;
-  --color-accent: #C23B3B; /* lifted crimson for AA contrast on dark */
-  --color-accent-strong: #810000;
+  --color-accent: #913333; /* lifted crimson for AA contrast on dark */
+  --color-accent-strong: #d8c00a;
   --color-border: #EEEBDD22;
 }
 
