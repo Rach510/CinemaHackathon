@@ -1,26 +1,17 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FileText, PlayCircle, ScanSearch, Sparkles, Users } from 'lucide-react';
+import { FileText, PlayCircle,  Sparkles, } from 'lucide-react';
 
 const STEPS = [
   {
     icon: FileText,
-    title: '01 — Submit the package',
+    title: '',
     body: 'Enter your title, plot, genre, language, target audience, and tag the actors attached to the project. Upload the screenplay as a .pdf.',
   },
-  {
-    icon: ScanSearch,
-    title: '02 — Automated coverage read',
-    body: 'Parallel.ai reads the script for structure, dialogue, pacing, and originality — the same lens a studio reader would apply, at production speed.',
-  },
-  {
-    icon: Users,
-    title: '03 — Cast fit modeling',
-    body: 'Tagged actors are scored against the roles implied by your plot, with an ensemble chemistry read across the full cast.',
-  },
+
   {
     icon: Sparkles,
-    title: '04 — Greenlight verdict',
+    title: '',
     body: 'Get one overall score plus expandable breakdowns for script quality, actor fit, and audience demographics — ready to share.',
   },
 ];
@@ -34,8 +25,8 @@ export default function IntroPage() {
         transition={{ duration: 0.5 }}
         className="mb-14 max-w-2xl"
       >
-        <span className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--color-accent)]">
-          How Coverage Works
+        <span className="font-bold text-xs uppercase tracking-[0.2em] text-[var(--color-accent)]">
+          Coverage
         </span>
         <h1 className="mt-3 font-display text-4xl font-semibold leading-tight md:text-5xl">
           A studio-grade script read, in minutes, not weeks.
@@ -53,18 +44,11 @@ export default function IntroPage() {
         </Link>
       </motion.div>
 
-      {/* Video walkthrough placeholders */}
-      <div className="mb-16 grid grid-cols-1 gap-6 md:grid-cols-2">
-        <VideoPlaceholder
-          title="2-minute product walkthrough"
-          // Swap the <video> src below for the real hosted asset.
-        />
-        <IframePlaceholder title="Sample coverage report walkthrough" />
-      </div>
+      
 
       {/* Step-by-step documentation cards */}
       <div className="mb-6">
-        <h2 className="font-display text-2xl font-semibold">The evaluation flow</h2>
+        <h2 className="font-display text-2xl font-semibold">How Coverage Works</h2>
       </div>
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         {STEPS.map((step, i) => (
@@ -80,7 +64,16 @@ export default function IntroPage() {
             <h3 className="font-display text-lg font-semibold">{step.title}</h3>
             <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-muted)]">{step.body}</p>
           </motion.div>
+          
         ))}
+      </div>
+      {/* Video walkthrough placeholders */}
+      <h2 className="font-display text-2xl font-semibold">|</h2>
+      <div className="mb-16 grid grid-cols-1 gap-7 dm:grid-cols-2">
+        <VideoPlaceholder
+          title=" "
+          // Swap the <video> src below for the real hosted asset.
+        />
       </div>
     </div>
   );

@@ -23,6 +23,7 @@ const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
 export default function Header() {
   const { theme, toggleTheme } = useTheme();
   const [profileOpen, setProfileOpen] = useState(false);
+  const [signInHover, setSignInHover] = useState(false);
 
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--color-border)] bg-[var(--color-bg)]/90 backdrop-blur">
@@ -53,13 +54,48 @@ export default function Header() {
             {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
           </button>
 
-          <button
-            type="button"
-            onClick={handleSignIn}
-            className="rounded-full border border-[var(--color-accent)] px-4 py-1.5 text-sm font-medium text-[var(--color-accent)] transition-colors hover:bg-[var(--color-accent)] hover:text-[var(--color-bg)]"
-          >
-            Sign In
-          </button>
+          {/*
+            Fixed-width anchor so the button's hover expansion overlaps
+            neighboring elements instead of pushing them — the profile
+            dropdown to the right never moves. `w-[110px]` matches the
+            collapsed button's natural width (adjust if "Sign In" copy
+            or font changes).
+          */}
+          <div className="relative h-9 w-[110px]">
+            <motion.button
+              type="button"
+              onClick={handleSignIn}
+              onHoverStart={() => setSignInHover(true)}
+              onHoverEnd={() => setSignInHover(false)}
+              layout
+              transition={{ layout: { duration: 0.35, ease: [0.4, 0, 0.2, 1] } }}
+              style={{ transformOrigin: 'left center' }}
+              className={`absolute left-0 top-0 flex h-9 items-center gap-2 overflow-hidden whitespace-nowrap rounded-full border border-[var(--color-accent)] px-4 text-sm font-medium transition-colors ${
+                signInHover
+                  ? 'z-30 bg-[var(--color-accent)] text-[var(--color-bg)]'
+                  : 'z-10 bg-transparent text-[var(--color-accent)]'
+              }`}
+            >
+              <span>Sign In</span>
+              {/*
+                Default: compact Parallel mark (first image). On hover,
+                the button expands horizontally (via the `layout` prop
+                above) and swaps in the full Parallel wordmark (second
+                image). `invert` recolors the monochrome PNG to stay
+                legible once the button background flips to the accent
+                color on hover.
+              */}
+              <motion.img
+                layout
+                src={signInHover ? '/brand/parallel-logo.png' : '/brand/parallel-mark.png'}
+                alt="Parallel"
+                transition={{ duration: 0.25, ease: 'easeInOut' }}
+                className={`object-contain ${
+                  signInHover ? 'h-3.5 w-auto invert' : 'h-4 w-4 dark:invert'
+                }`}
+              />
+            </motion.button>
+          </div>
 
           <div className="relative">
             <button
