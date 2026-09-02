@@ -45,14 +45,7 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <button
-            type="button"
-            onClick={toggleTheme}
-            aria-label="Toggle color theme"
-            className="rounded-full p-2 text-[var(--color-text-muted)] transition-colors hover:bg-[var(--color-accent)]/10 hover:text-[var(--color-accent)]"
-          >
-            {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
-          </button>
+          
 
           {/*
             Fixed-width anchor so the button's hover expansion overlaps
@@ -61,7 +54,7 @@ export default function Header() {
             collapsed button's natural width (adjust if "Sign In" copy
             or font changes).
           */}
-          <div className="relative h-9 w-[110px]">
+          <div className="relative h-10 w-[140px]">
             <motion.button
               type="button"
               onClick={handleSignIn}
@@ -70,7 +63,7 @@ export default function Header() {
               layout
               transition={{ layout: { duration: 0.35, ease: [0.4, 0, 0.2, 1] } }}
               style={{ transformOrigin: 'left center' }}
-              className={`absolute left-0 top-0 flex h-9 items-center gap-2 overflow-hidden whitespace-nowrap rounded-full border border-[var(--color-accent)] px-4 text-sm font-medium transition-colors ${
+              className={`absolute left-0 top-0 flex h-10 items-center gap-2 overflow-hidden whitespace-nowrap rounded-full border border-[var(--color-accent)] px-4 text-sm font-medium transition-colors ${
                 signInHover
                   ? 'z-30 bg-[var(--color-accent)] text-[var(--color-bg)]'
                   : 'z-10 bg-transparent text-[var(--color-accent)]'
@@ -91,12 +84,20 @@ export default function Header() {
                 alt="Parallel"
                 transition={{ duration: 0.25, ease: 'easeInOut' }}
                 className={`object-contain ${
-                  signInHover ? 'h-3.5 w-auto invert' : 'h-4 w-4 dark:invert'
+                  signInHover ? 'h-8 w-auto invert' : 'h-9 w-8 dark:invert'
                 }`}
               />
             </motion.button>
           </div>
 
+            <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label="Toggle color theme"
+            className="rounded-full p-2 text-[var(--color-text-muted)] transition-colors hover:bg-[var(--color-accent)]/10 hover:text-[var(--color-accent)]"
+          >
+            {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+          </button>
           <div className="relative">
             <button
               type="button"
