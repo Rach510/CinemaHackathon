@@ -19,37 +19,41 @@ export async function submitScriptForEvaluation(
     throw new Error('A .pdf script upload is required before submission.');
   }
 
+  const formData = new FormData();
+
+  formData.append('title', submission.title);
+  formData.append('plot', submission.plot);
+  formData.append('genre', submission.genre);
+  formData.append('language', submission.language);
+
+  formData.append(
+    'actors',
+    JSON.stringify(submission.actors)
+  );
+
+  formData.append('director', submission.director);
+  formData.append('target_audience', submission.targetAudience);
+
+  // THIS sends the actual PDF
+  formData.append('script', submission.scriptFile);
+
   const response = await fetch(`${API_URL}/analyze`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      title: submission.title,
-      plot: submission.plot,
-      genre: submission.genre,
-      language: submission.language,
-      actors: submission.actors,
-      director: submission.director,
-      target_audience: submission.targetAudience,
-    }),
+    body: formData,
   });
 
   if (!response.ok) {
     const errorText = await response.text();
+
     throw new Error(
-      `Backend error (${response.status}): ${errorText || 'Unknown error'}`
+      `Backend error (${response.status}): ${
+        errorText || 'Unknown error'
+      }`
     );
   }
 
   const result: EvaluationResult = await response.json();
 
-  /*
-   * Store the completed evaluation temporarily.
-   *
-   * The existing frontend hook expects a jobId and polling lifecycle,
-   * so we adapt the synchronous backend response to that interface.
-   */
   const jobId = `completed_${Date.now()}`;
 
   sessionStorage.setItem(
